@@ -1,12 +1,40 @@
 <?php
-require '../../includes/funciones.php';;
+
+/* Base de Datos */
+require '../../includes/config/database.php';
+$db = conectarDB();
+
+
+/* Validando el Método */
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+  /* Agregar Acciones */
+
+  $titulo = $_POST['titulo'];
+  $precio = $_POST['precio'];
+  $descripcion = $_POST['descripcion'];
+  $habitaciones = $_POST['habitaciones'];
+  $wc = $_POST['wc'];
+  $estacionamiento = $_POST['estacionamiento'];
+  $vendedorId = $_POST['vendedor'];
+
+  // ? Insertar en la BD
+  $query = "INSERT INTO propiedades (titulo, precio, descripcion, habitacion, wc, estacionamiento, vendedor_id ) VALUES ('$titulo', '$precio', '$descripcion', '$habitaciones', '$wc', '$estacionamiento', '$vendedorId')";
+
+  $resultado = mysqli_query($db, $query);
+
+  if ($resultado) {
+    echo "insertado correctamente";
+  }
+}
+
+require '../../includes/funciones.php';
 incluriTemplate('header');
 ?>
 <main class="contenedor seccion">
   <h1>Crear</h1>
   <a href="/admin" class="boton-verde">Volver</a>
   <!-- Formulario -->
-  <form class="formulario">
+  <form class="formulario" method="POST" action="/admin/propiedades/crear.php">
     <fieldset>
       <legend>Informacion General</legend>
       <label for="titulo">Titulo:</label>
