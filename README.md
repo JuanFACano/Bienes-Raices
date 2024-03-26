@@ -4,3 +4,7 @@ del profesor Juan Pablo de la Torre en Udemy (Recomendado)
 # ¿Por qué cambiar a este proyecto?
 
 - Este proyecto se crea debido a que es necesario migrar nuestro proyecto base (creado en HTML, CSS y Javascript) al lenguaje PHP y agregar conexion a una base de datos
+
+## Pasos de modificacion
+
+1. creacion de parciales de código y los templates
