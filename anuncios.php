@@ -1,7 +1,7 @@
 <?php
-include './includes/templates/header.php';
+require 'includes/funciones.php';;
+incluriTemplate('header');
 ?>
-
 
 <main class="contenedor seccion">
   <div class="contenedor-anuncios">
@@ -219,4 +219,4 @@ include './includes/templates/header.php';
   <!-- /contenedor-anuncio -->
 </main>
 
-<?php include './includes/templates/footer.php'; ?>
+<?php incluriTemplate('footer') ?>

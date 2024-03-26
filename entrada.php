@@ -1,5 +1,7 @@
-<?php include './includes/templates/header.php'; ?>
-
+<?php
+require 'includes/funciones.php';;
+incluriTemplate('header');
+?>
 <main class="contenedor seccion contenido-centrado contenido-anuncio">
   <h1>Guía para la decoración de tu hogar</h1>
   <picture>
@@ -39,4 +41,4 @@
   </div>
 </main>
 
-<?php include './includes/templates/footer.php'; ?>
+<?php incluriTemplate('footer') ?>
