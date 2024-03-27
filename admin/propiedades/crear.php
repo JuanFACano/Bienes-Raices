@@ -8,6 +8,14 @@ $db = conectarDB();
 
 $errores = [];
 
+$wc = '';
+$titulo = '';
+$precio = '';
+$vendedorId = '';
+$descripcion = '';
+$habitaciones = '';
+$estacionamiento = '';
+
 // ? Ejecutar còdigo despues de que el usuario ejecute el formlario 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   // ? Agregar Acciones
@@ -52,7 +60,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 
   // ? Valida que el arreglo de errores este vacio
-
   if (empty($errores)) {
     // ? Insertar en la BD
     $query = "INSERT INTO propiedades (titulo, precio, descripcion, habitacion, wc, estacionamiento, vendedor_id ) VALUES ('$titulo', '$precio', '$descripcion', '$habitaciones', '$wc', '$estacionamiento', '$vendedorId')";
@@ -84,29 +91,29 @@ incluriTemplate('header');
     <fieldset>
       <legend>Informacion General</legend>
       <label for="titulo">Titulo:</label>
-      <input type="text" name="titulo" id="titulo" placeholder="Titulo propiedad">
+      <input value="<?php echo $titulo; ?>" type="text" name="titulo" id="titulo" placeholder="Titulo propiedad">
 
       <label for="precio">Precio:</label>
-      <input type="number" name="precio" id="precio" placeholder="precio propiedad">
+      <input value="<?php echo $precio; ?>" type="number" name="precio" id="precio" placeholder="precio propiedad">
 
       <label for="imagen">imagen:</label>
       <input type="file" name="imagen" id="imagen" accept="image/jpeg, image/png">
 
       <label for="descripcion">Descripcion:</label>
-      <textarea name="descripcion" id="descripcion" cols="30" rows="10"></textarea>
+      <textarea name="descripcion" id="descripcion" cols="30" rows="10"><?php echo $descripcion; ?></textarea>
     </fieldset>
 
     <fieldset>
       <legend>Informacion Propiedad</legend>
 
       <label for="habitaciones">Habitaciones:</label>
-      <input type="number" name="habitaciones" id="habitaciones" placeholder="Ejm. 3" min="1" max="9">
+      <input value="<?php echo $habitaciones; ?>" type="number" name="habitaciones" id="habitaciones" placeholder="Ejm. 3" min="1" max="9">
 
       <label for="wc">baños:</label>
-      <input type="number" name="wc" id="wc" placeholder="Ejm. 3">
+      <input value="<?php echo $wc; ?>" type="number" name="wc" id="wc" placeholder="Ejm. 3">
 
       <label for="estacionamiento">Estacionamiento:</label>
-      <input type="number" name="estacionamiento" id="estacionamiento" placeholder="Ejm. 3">
+      <input value="<?php echo $estacionamiento; ?>" type="number" name="estacionamiento" id="estacionamiento" placeholder="Ejm. 3">
     </fieldset>
     <fieldset>
       <legend>Vendedor</legend>
