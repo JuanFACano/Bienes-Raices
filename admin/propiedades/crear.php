@@ -32,9 +32,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   $habitaciones = mysqli_real_escape_string($db, $_POST['habitaciones']);
   $estacionamiento = mysqli_real_escape_string($db, $_POST['estacionamiento']);
   $creado = date('Y/m/d');
+  // ? Asignar $_FILES a una variable
+  $imagen = $_FILES['imagen'];
+
 
   // ? Validacion de formulario
-
   if (!$titulo) {
     $errores[] = 'Debes añadir un titulo';
   }
@@ -63,6 +65,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $errores[] = 'Elije un vendedor';
   }
 
+  if (!$imagen['name'] || $imagen['error']) {
+    $errores[] = 'La imagen es obligatoria';
+  }
+
+  // ? Validar imagen por tamaño 
+  $medida = 1000 * 100;
+  if ($imagen['size'] > $medida) {
+    $errores[] = 'La imagen es muy pesada';
+  }
 
   // ? Valida que el arreglo de errores este vacio
   if (empty($errores)) {
@@ -96,7 +107,7 @@ incluriTemplate('header');
 
 
   <!-- Formulario -->
-  <form class="formulario" method="POST" action="/admin/propiedades/crear.php">
+  <form class="formulario" method="POST" action="/admin/propiedades/crear.php" enctype="multipart/form-data">
     <fieldset>
       <legend>Informacion General</legend>
       <label for="titulo">Titulo:</label>
