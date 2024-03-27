@@ -22,15 +22,15 @@ $estacionamiento = '';
 
 // ? Ejecutar còdigo despues de que el usuario ejecute el formlario 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-  // ? Agregar Acciones
 
-  $wc = $_POST['wc'];
-  $titulo = $_POST['titulo'];
-  $precio = $_POST['precio'];
-  $vendedorId = $_POST['vendedor'];
-  $descripcion = $_POST['descripcion'];
-  $habitaciones = $_POST['habitaciones'];
-  $estacionamiento = $_POST['estacionamiento'];
+  // ? Agregar Acciones
+  $wc = mysqli_real_escape_string($db, $_POST['wc']);
+  $titulo = mysqli_real_escape_string($db, $_POST['titulo']);
+  $precio = mysqli_real_escape_string($db, $_POST['precio']);
+  $vendedorId = mysqli_real_escape_string($db, $_POST['vendedor']);
+  $descripcion = mysqli_real_escape_string($db, $_POST['descripcion']);
+  $habitaciones = mysqli_real_escape_string($db, $_POST['habitaciones']);
+  $estacionamiento = mysqli_real_escape_string($db, $_POST['estacionamiento']);
   $creado = date('Y/m/d');
 
   // ? Validacion de formulario
