@@ -4,6 +4,10 @@
 require '../../includes/config/database.php';
 $db = conectarDB();
 
+// ? Consulta para traer Vendedor
+$consulta = 'SELECT * FROM vendedores';
+$resultado = mysqli_query($db, $consulta);
+
 // ? Arreglo con errores
 
 $errores = [];
@@ -27,6 +31,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   $descripcion = $_POST['descripcion'];
   $habitaciones = $_POST['habitaciones'];
   $estacionamiento = $_POST['estacionamiento'];
+  $creado = date('Y/m/d');
 
   // ? Validacion de formulario
 
@@ -62,13 +67,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   // ? Valida que el arreglo de errores este vacio
   if (empty($errores)) {
     // ? Insertar en la BD
-    $query = "INSERT INTO propiedades (titulo, precio, descripcion, habitacion, wc, estacionamiento, vendedor_id ) VALUES ('$titulo', '$precio', '$descripcion', '$habitaciones', '$wc', '$estacionamiento', '$vendedorId')";
+    $query = "INSERT INTO propiedades (titulo, precio, descripcion, habitacion, wc, estacionamiento, creado, vendedor_id) VALUES ('$titulo', '$precio', '$descripcion', '$habitaciones', '$wc', '$estacionamiento', '$creado', '$vendedorId')";
 
     $resultado = mysqli_query($db, $query);
-
-    if ($resultado) {
-      echo "insertado correctamente";
-    }
   }
 }
 
@@ -85,6 +86,8 @@ incluriTemplate('header');
       <?php echo $error ?>
     </div>
   <?php endforeach ?>
+
+
 
   <!-- Formulario -->
   <form class="formulario" method="POST" action="/admin/propiedades/crear.php">
@@ -119,8 +122,9 @@ incluriTemplate('header');
       <legend>Vendedor</legend>
       <select name="vendedor" id="vendedor">
         <option value="" selected>-- Seleccione --</option>
-        <option value="1">Juan</option>
-        <option value="2">Karen</option>
+        <?php while ($vendedor = mysqli_fetch_assoc($resultado)) : ?>
+          <option <?php echo $vendedorId == $vendedor['id'] ? 'selected' : ''; ?> value="<?php echo $vendedor['id']; ?>"><?php echo $vendedor['nombre'] . " ", $vendedor['apellido']; ?></option>
+        <?php endwhile ?>
       </select>
     </fieldset>
     <input class="boton-verde" type="submit" value="Crear Propiedad">
