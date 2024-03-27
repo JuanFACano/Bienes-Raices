@@ -70,6 +70,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $query = "INSERT INTO propiedades (titulo, precio, descripcion, habitacion, wc, estacionamiento, creado, vendedor_id) VALUES ('$titulo', '$precio', '$descripcion', '$habitaciones', '$wc', '$estacionamiento', '$creado', '$vendedorId')";
 
     $resultado = mysqli_query($db, $query);
+
+
+    // ? Redireccionar usuario
+    if ($resultado) {
+      header('Location: /admin');
+    }
   }
 }
 
